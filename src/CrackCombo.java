@@ -3,12 +3,12 @@ package combos;
 public class CrackCombo
 {
 	 private static Boolean found;//a Boolean that says whether the desired number has been found in the series of CrackCombos
-	 private static int[] numbers; //set of numbers entered as input *note* make const
+	 private static int[] numbers; //set of numbers entered as input 
 	 private int itr;//iterates through set of 'numbers'
-	 private static int desiredValue; //holds the desired value make const
-	 private char symbol;
-	 private int value;
-	 private CrackCombo next;
+	 private static int desiredValue; //holds the desired value 
+	 private char symbol;//contains operation symbol performed the last iteration to get current value
+	 private int value;//result of parameter symbol operation between the next number in the array and the current value
+	 private CrackCombo next;//a pointer to it's parent operation
 	 
 	 
 	 
@@ -42,7 +42,6 @@ public class CrackCombo
 		 
 		 
 		 found = checkValue();
-//		 System.out.println(symbol + "! ITR : " + this.itr + " !" + numbers[this.itr]);
 		 
 		 if(this.itr < numbers.length  && found == false)
 		 {
@@ -54,8 +53,8 @@ public class CrackCombo
 		 }
 		 else
 		 {
-			 showCrackCombos();
-			 System.out.println("Done");
+			 //showCrackCombos();//uncomment to see all operations performed and all values at terminal leaf nodes
+			 
 		 }
 	 }
 	 
@@ -85,22 +84,21 @@ public class CrackCombo
 		 
 		 int CrackComboResult = list.value;
 		 String rCrackCombosPerformed = "";
-		 //list = list.next;
 		 
 		 int numItr = numbers.length - 1;
 		 
-		 /*while(list != null)
-		 {
-			 System.out.println("|NUM|" + numItr);
-			 rCrackCombosPerformed +=(numbers[numItr] + " " + list.symbol + " ");
-			 list = list.next;
-			 numItr--;
-			 
-		 }*/
 		 
 		 for(int i = numItr ; i >= 0 ; i--)
 		 {
-			 rCrackCombosPerformed +=(numbers[i]);
+			 if(numbers[i] > 9)
+			 {
+				 rCrackCombosPerformed += new StringBuilder(Integer.toString(numbers[i])).reverse().toString(); // fixes formatting problems
+			 }
+			 else
+			 {
+				 rCrackCombosPerformed +=(numbers[i]);
+			 }
+			 
 			 if(list != null)
 			 {
 				 rCrackCombosPerformed +=list.symbol;

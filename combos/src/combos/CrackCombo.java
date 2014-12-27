@@ -1,22 +1,24 @@
 package combos;
 
+
 public class CrackCombo
 {
 	 private static Boolean found;//a Boolean that says whether the desired number has been found in the series of CrackCombos
-	 private static double[] numbers; //set of numbers entered as input 
+	 private static Double[] numbers; //set of numbers entered as input 
 	 private int itr;//iterates through set of 'numbers'
-	 private static double desiredValue; //holds the desired value 
+	 private static Double desiredValue; //holds the desired value 
 	 private char symbol;//contains operation symbol performed the last iteration to get current value
-	 private double value;//result of parameter symbol operation between the next number in the array and the current value
+	 private Double value;//result of parameter symbol operation between the next number in the array and the current value
 	 private CrackCombo next;//a pointer to it's parent operation
-	 private String operation;//shows numbers perfomed on and the accompanying operation
+	 private String operation;//shows numbers performed on and the accompanying operation
+	 private static int solutions;
 	 
 	 
-	 
-	 CrackCombo(int desiredValue, double[] numbers)
+	 CrackCombo(Double desiredValue, Double[] numbers)
 	 {
 		 //STATIC VARIABLES
 		 this.found = false;
+		 //this.solutions = 0;
 		 
 		 //STATIC CONST VARIABLES
 		 this.numbers = numbers;
@@ -33,7 +35,7 @@ public class CrackCombo
 		 makeTree();
 	 }
 	 
-	 CrackCombo(char symbol, double value,CrackCombo next, int itr, String operation) //For creating chained CrackCombo instances branching from first instance
+	 CrackCombo(char symbol, Double value,CrackCombo next, int itr, String operation) //For creating chained CrackCombo instances branching from first instance
 	 {
 		 
 		 this.symbol = symbol;
@@ -52,11 +54,12 @@ public class CrackCombo
 		 }
 		 else if(found)//if it has iterated through every number in the set and found is true
 		 {
+			 solutions++;
 			 showCrackCombos();//show the accompanying operations
 		 }
 		 else if(this.value <= 18 && this.value > 15)
 		 {
-			 showCrackCombos();
+			// showCrackCombos();
 		 }
 		 else
 		 {
@@ -67,8 +70,9 @@ public class CrackCombo
 	 
 	 Boolean checkValue()
 	 {
-		if(value == desiredValue)
+		if(Double.compare(value, desiredValue) == 0)
 			return true;
+
 		else
 			return false;
 		 
@@ -104,6 +108,19 @@ public class CrackCombo
 			 list = list.next;
 		 }
 		
+		 for (int i = 0 ; i < 20 ; i++)
+		 {
+			 System.out.print("*");
+		 }
+		 System.out.println();
+		 String solutionNum = "SOLUTION " + solutions;
+		 System.out.printf("*%-18s*\n",solutionNum);
+		 for (int i = 0 ; i < 20 ; i++)
+		 {
+			 System.out.print("*");
+		 }
+		 System.out.println();
+		 
 		 System.out.println(format.toString());
 		 
 		 

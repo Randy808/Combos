@@ -28,7 +28,7 @@ public class CrackCombo
 		 this.symbol = ' ';
 		 this.value = numbers[0];
 		 this.next = null;
-		 operation = value + " + 0";
+		 operation = "STARTING NUMBER";
 		 
 		 itr = 1;
 		 
